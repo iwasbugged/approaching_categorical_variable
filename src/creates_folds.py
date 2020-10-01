@@ -6,7 +6,7 @@ from sklearn import model_selection
 if __name__ == "__main__":
 
     # Read training data
-    df = pd.read_csv('../dataset/cat_train.csv')
+    df = pd.read_csv('../dataset/adult.csv')
 
     # we create a new column called kfold and fill it with -1
     df['kfold'] = -1
@@ -15,7 +15,7 @@ if __name__ == "__main__":
     df = df.sample(frac = 1).reset_index(drop = True)
 
     # fetch lebels
-    y = df.target.values
+    y = df.income.values
 
     # initiate the kfold class from model_selection
     kf = model_selection.StratifiedKFold(n_splits= 5 )
@@ -25,4 +25,4 @@ if __name__ == "__main__":
         df.loc[v_ , 'kfold'] = f
 
     # save the new csv with kfold column
-    df.to_csv('../dataset/cat_train_folds.csv' , index = False)
+    df.to_csv('../dataset/adult_folds.csv' , index = False)
